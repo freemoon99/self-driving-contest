@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+  <robot name="my_car">
+    <link name="base_link">
+      <visual>
+        <geometry>
+          <box size="0.40 0.20 .15"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
+        <material name="green">
+          <color rgba="1 1 0 1"/>
+        </material>
+      </visual>
+      
+      <collision>
+        <geometry>
+            <box size="0.14 .14 .1"/>
+        </geometry>
+      </collision>
+  
+    </link>
+
+  <link name="front_wheel_r">
+      <visual>
+        <geometry>
+          <cylinder length="0.03" radius="0.055"/>
+        </geometry>
+        <origin rpy="1.570795 0 0" xyz="0.15 0.11 0"/>
+          <material name="black">
+            <color rgba="0 0 0 1"/>
+          </material>
+      </visual>
+      
+      <collision>
+        <geometry>
+             <cylinder length="0.03" radius="0.055"/>
+        </geometry>
+      </collision>
+      
+    </link>
+  
+  <joint name="joint_front_wheel_r" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_wheel_r"/>
+    <origin xyz="0 0 0" rpy="0 0 0" /> 
+  
+  </joint>  
+  
+  <link name="front_wheel_l">
+      <visual>
+        <geometry>
+          <cylinder length="0.03" radius="0.055"/>
+        </geometry>
+        <origin rpy="-1.570795 0 0" xyz="0.15 -0.11 0"/>
+          <material name="black">
+            <color rgba="0 0 0 1"/>
+          </material>
+      </visual>
+    </link>
+  
+  <joint name="joint_front_wheel_l" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_wheel_l"/>
+    <origin xyz="0 0 0" rpy="0 0 0" />      
+  </joint>  
+    
+<link name="rear_wheel_r">
+      <visual>
+        <geometry>
+          <cylinder length="0.03" radius="0.055"/>
+        </geometry>
+        <origin rpy="1.570795 0 0" xyz="-0.15 0.11 0"/>
+          <material name="black">
+            <color rgba="0 0 0 1"/>
+          </material>
+      </visual>
+      
+      <collision>
+        <geometry>
+             <cylinder length="0.03" radius="0.055"/>
+        </geometry>
+      </collision>
+      
+    </link>
+  
+  <joint name="joint_rear_wheel_r" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_wheel_r"/>
+    <origin xyz="0 0 0" rpy="0 0 0" /> 
+  
+  </joint>  
+  
+  <link name="rear_wheel_l">
+      <visual>
+        <geometry>
+          <cylinder length="0.03" radius="0.055"/>
+        </geometry>
+        <origin rpy="-1.570795 0 0" xyz="-0.15 -0.11 0"/>
+          <material name="black">
+            <color rgba="0 0 0 1"/>
+          </material>
+      </visual>
+    </link>
+  
+  <joint name="joint_rear_wheel_l" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_wheel_l"/>
+    <origin xyz="0 0 0" rpy="0 0 0" /> 
+
+ </joint> 
+ 
+   
+  
+
+   <link name="link_lidar">
+      <visual>
+        <geometry>
+          <cylinder length="0.03" radius="0.06"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0.20"/>
+          <material name="black">
+            <color rgba="0 0 0 1"/>
+          </material>
+      </visual>
+    </link>
+  
+   <joint name="joint_lidar" type="continuous">
+    <parent link="base_link"/>
+    <child link="link_lidar"/>
+    <origin xyz="0 0 0" rpy="0 0 0" /> 
+  
+  </joint>   
+    
+ 
+ </robot>
+

@@ -1,0 +1,33 @@
+<launch>
+
+  <node pkg="tf" type="static_transform_publisher" name="odom_broadcaster" args="1 1 0 0 0 0 map odom 10" />
+  <node pkg="tf" type="static_transform_publisher" name="sonar_broadcaster" args="0.2 0 0 0 0 0 base_link sonar_range 10" /> 
+  <node pkg="m_race_car_base_control" type="m_race_car_control_node" name="race_car_node"/>
+ 
+  <node pkg="m_race_vision" type="race_opencv_vision_node" name="race_vision_node" />
+
+  <node pkg="sc_mini" type="sc_mini" name="sc_mini" output="screen">
+    <param name="frame_id" type="string" value="laser_link"/>
+    <param name="port" type="string" value="/dev/sc_mini"/>
+    <param name="baud_rate" type="int" value="115200"/>
+  </node>
+    
+  <arg name="geotiff_map_file_path" default="$(find hector_geotiff)/maps"/>
+
+  <param name="/use_sim_time" value="false"/>
+
+  <node pkg="rviz" type="rviz" name="rviz"
+    args="-d $(find m_race_car_base_control)/rviz/m_race.rviz"/>
+
+  <include file="$(find hector_mapping)/launch/mapping_test.launch"/>
+
+  <include file="$(find hector_geotiff_launch)/launch/geotiff_mapper.launch">
+    <arg name="trajectory_source_frame_name" value="scanmatcher_frame"/>
+    <arg name="map_file_path" value="$(arg geotiff_map_file_path)"/>
+  </include>  
+  
+  <node pkg="race_waypoints_move" type="race_waypoints_move_node" name="race_waypoints_move_node" />
+  
+  <node pkg="waypoint_race_car_control" type="waypoint_race_car_control_node" name="waypoint_race_car_control_node" />
+  
+</launch>
